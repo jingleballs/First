@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class Test {
     public static void main(String[] args) throws IOException {
-        stringSort2();
+        sortStrings();
     }
 
     public static void loop() {
@@ -87,6 +87,10 @@ public class Test {
         int strIndex = 0;
         int numIndex = 0;
         while (i<array.length){
+            if(array[i].length()==0){
+                i++;
+                continue;
+            }
             try {
                 numArray[numIndex] = Integer.parseInt(array[i]);
                 numIndex++;
@@ -146,5 +150,54 @@ public class Test {
             System.out.println(intArray[i]);
             i++;
         }
+    }
+    public static void testSplit() throws IOException {
+        //String q = Program.stdIn.readLine();
+        String q="one/two//three///four////1//2///3///41";
+        String array[] = q.split("/");
+        int i= 0;
+        while(i<array.length){
+            System.out.format("'%s'\n", array[i]);
+            i++;
+        }
+    }
+    public static void whileDemo(){
+        int i = 0;
+        while(i<11){
+            System.out.format("%s: Hello world!\n", i);
+            i++;
+        }
+    }
+    public static void forDemo(){
+        for(int i=0;i<11;i++) {
+            System.out.format("%s: Hello world!\n", i);
+        }
+    }
+    public static void doWhileDemo(){
+        int i = 1;
+        do{
+            System.out.format("%s: Hello world!\n", i);
+            i++;
+        }
+        while(i<11);
+    }
+    public static void sortStrings() throws IOException {
+        String[] array = new String[100];
+        System.out.println("Введите ваши строки: ");
+        int arrayIndex = 0;
+        for(;arrayIndex<array.length;arrayIndex++) {
+            array[arrayIndex] = Program.stdIn.readLine();
+            if(array[arrayIndex].length()==0) break;
+        }
+        System.out.println("Введите разделитель: ");
+        String s = Program.stdIn.readLine();
+        String[] copyArray = new String[100];
+        copyArray = array;
+        System.out.println("Ваш результат: ");
+        for(int i=0;i<arrayIndex;i++){
+            System.out.print(copyArray[i] + s);
+        }
+
+
     }
 }
