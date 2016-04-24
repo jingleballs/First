@@ -2,7 +2,10 @@ package example;
 
 import fedchun.kirill.Program;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.Arrays;
 
 /**
@@ -11,6 +14,22 @@ import java.util.Arrays;
 public class Test {
     public static void main(String[] args) throws IOException {
         sortStrings();
+    }
+
+    //private final static BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+    private final static BufferedReader stdIn = new BufferedReader(new StringReader(
+            "hello\n"+
+            "232\r"+
+            "World\r\n"+
+            "\n"+
+            "===\r"
+    ));
+
+    public static void stringReaderDemo() throws IOException {
+        System.out.print(">");
+        String s = stdIn.readLine();
+        System.out.println();
+        System.out.println(s);
     }
 
     public static void loop() {
@@ -29,7 +48,7 @@ public class Test {
 
     public static void tryAgain(String[] args) throws IOException {
         System.out.print("Введите число: ");
-        String s = Program.stdIn.readLine();
+        String s =stdIn.readLine();
         double a = 0;
         boolean isNumber = true;
         try {
@@ -52,7 +71,7 @@ public class Test {
         int k = 0;
         while (true) {
             System.out.format("Введите строку номер %s: \n", i);
-            String s = Program.stdIn.readLine();
+            String s = stdIn.readLine();
             if (s.length() == 0) break;
             strList[i] = s;
             i = i + 1;
@@ -60,7 +79,7 @@ public class Test {
         while (true) {
             System.out.println("Какую строку вы бы хотели вывести на экран?");
             try {
-                String j = Program.stdIn.readLine();
+                String j = stdIn.readLine();
                 if (j.length() == 0) break;
                 k = Integer.parseInt(j);
                 if (k < 1 || k > 0) {
@@ -79,7 +98,7 @@ public class Test {
     }
     public static void stringSort2() throws IOException {
         System.out.println("Введите ваши числа и строки:");
-        String q = Program.stdIn.readLine();
+        String q = stdIn.readLine();
         String[] array = q.split(" ");
         int[] numArray = new int[100];
         String[] srtArray = new String[100];
@@ -186,11 +205,11 @@ public class Test {
         System.out.println("Введите ваши строки: ");
         int arrayIndex = 0;
         for(;arrayIndex<array.length;arrayIndex++) {
-            array[arrayIndex] = Program.stdIn.readLine();
+            array[arrayIndex] =stdIn.readLine();
             if(array[arrayIndex].length()==0) break;
         }
         System.out.println("Введите разделитель: ");
-        String s = Program.stdIn.readLine();
+        String s = stdIn.readLine();
         String[] copyArray = new String[100];
         copyArray = array;
         System.out.println("Ваш результат: ");
@@ -199,5 +218,76 @@ public class Test {
         }
 
 
+    }
+    public static void charDemo() throws IOException {
+        System.out.print(">");
+        String s =stdIn.readLine();
+        for(int i=0;i<s.length();i++){
+            char d = s.charAt(i);
+            System.out.format("[%s]='%s'>%s\n", i, d, (int)d);
+        }
+
+    }
+    public static void charDemo2(){
+        short[] array = {72,101,108,108,111,};
+        char a = 72;
+        char b = 'H';
+        System.out.println(a!=b);
+        for(int i=0;i<array.length;i++){
+            System.out.print((char)(array[i]+1));
+        }
+    }
+    public static void escapeCharDemo(){
+        char a = '\t';
+        char b = '\n';
+        char x = '\u0048';
+        char y = 0x48;
+        System.out.println((int)a);
+        System.out.println((int)b);
+        System.out.println(x);
+        System.out.println(y);
+
+        String s = "\u03b1ello";
+        System.out.println(s);
+        System.out.println((char)945);
+        System.out.println("\tHello");
+    }
+    public static void substringDemo() throws IOException {
+        System.out.println("Введите текст: ");
+        String text = stdIn.readLine();
+        for(;;){
+            System.out.format("Введите начальный и конечный индекс подстроки(max:%s) через запятую: ", text.length());
+            String s =stdIn.readLine();
+            if(s.length()==0) break;
+            String[] array =s.split(",");
+            if(array.length<2){
+                System.out.println("Недостаточно индексов");
+                continue;
+            }
+            for(int i=0;i<2;i++){
+                array[i]=array[i].trim();
+                System.out.format("'%s'\n", array[i]);
+            }
+            int startIndex = 0;
+            int endIndex = 0;
+            try{
+                startIndex = Integer.parseInt(array[0]);
+                endIndex = Integer.parseInt(array[1]);
+            }
+            catch(NumberFormatException e){
+                System.out.print("Один из индексов неверен");
+                continue;
+            }
+            if(startIndex<0||startIndex>text.length()-1){
+                System.out.println("Начальный индекс за пределами строки");
+                continue;
+            }
+            if(endIndex<=startIndex||endIndex>text.length()){
+                System.out.println("Конечный индекс неверен");
+                continue;
+            }
+            String subStr = text.substring(startIndex, endIndex);
+            System.out.println(subStr);
+        }
     }
 }

@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
  * Created by Кирилл on 17.03.2016.
  */
 public class Program {
-    public static BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
     public static void main(String[] args) throws IOException {
         double a = ReadDouble("Введите а: ", "Введите числовое значение");
         double b = ReadDouble("Введите b: ", "Введите числовое значение");
